@@ -7,7 +7,7 @@
       name="description"
       content="Ouro Palace Hotel em Ourolândia, Bahia. Hospedagem confortável com WiFi, café da manhã, atendimento 24 horas e reservas pelo WhatsApp."
     />
-    <title>Ouro Palace Hotel | Hospedagem em Ourolandia</title>
+    <title>Ouro Palace Hotel | Hospedagem em Ourolândia</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -34,6 +34,7 @@
         <a href="#quartos">Quartos</a>
         <a href="#servicos">Serviços</a>
         <a href="#contato">Contato</a>
+        <a href="#fotos">Fotos</a>
         <a href="#reservas">Reservas</a>
       </nav>
 
@@ -171,20 +172,46 @@
       <section class="section split-section" id="servicos">
         <div>
           <p class="eyebrow">Serviços</p>
-          <h2>Hospitalidade pratica, elegante e completa.</h2>
+          <h2>Hospitalidade prática, elegante e completa.</h2>
           <p>
-            Estrutura pensada para quem busca uma estadia tranquila no centro de Ourolandia,
+            Estrutura pensada para quem busca uma estadia tranquila no centro de Ourolândia,
             com comodidades essenciais e atendimento proximo.
           </p>
         </div>
         <div class="service-list">
           <span>WiFi gratuito em todos os quartos</span>
           <span>Café da manhã incluso</span>
-          <span>Estacionamento</span>
           <span>Atendimento 24 horas</span>
           <span>TV a cabo</span>
           <span>Ar-condicionado</span>
           <span>Serviço de lavanderia</span>
+        </div>
+      </section>
+
+      <section class="section photos-section" id="fotos">
+        <div class="section-heading">
+          <div class="heading-line"></div>
+          <div>
+            <h2>Fotos</h2>
+            <p>Conheça o Ouro Palace Hotel</p>
+          </div>
+          <div class="heading-line"></div>
+        </div>
+        <div class="photo-grid">
+          <img src="assets/originais/quarto-casal-standard.jpg" alt="Quarto casal standard" />
+          <img src="assets/originais/camara varanda 2.jpeg" alt="Quarto casal com varanda" />
+          <img src="assets/originais/quarto com banheiro casal.jpeg" alt="Quarto casal com banheiro" />
+          <img src="assets/originais/cama solteiro duplo.jpeg" alt="Quarto duplo com duas camas" />
+          <img src="assets/originais/cama solteiro 2.jpeg" alt="Quarto solteiro" />
+          <img src="assets/originais/tv quarto solteiro duplo.jpeg" alt="Quarto duplo com TV e frigobar" />
+          <img src="assets/originais/correor.jpeg" alt="Corredor do hotel" />
+          <img src="assets/originais/foto-1.jpg" alt="Quarto com cama de casal e varanda" />
+          <img src="assets/originais/foto-7.jpg" alt="Banheiro com box de vidro" />
+          <img src="assets/originais/CASAL 1.jpeg" alt="Quarto casal" />
+          <img src="assets/originais/CASAL 2.jpeg" alt="Quarto casal 2" />
+          <img src="assets/originais/CASAL FOTO LADO.jpeg" alt="Quarto casal vista lateral" />
+          <img src="assets/originais/A NOITE QUARTO.jpeg" alt="Quarto à noite" />
+          <img src="assets/originais/CASA.jpeg" alt="Fachada do hotel" />
         </div>
       </section>
 
@@ -250,6 +277,14 @@
       <p>© 2026 Ouro Palace Hotel - Ourolandia, Bahia</p>
       <a href="https://wa.me/5574988562873?text=Olá,%20Ouro%20Palace%20Hotel!%20Gostaria%20de%20solicitar%20uma%20reserva.">WhatsApp</a>
     </footer>
+
+    <!-- Lightbox -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+      <button class="lightbox-close" id="lightbox-close" aria-label="Fechar">×</button>
+      <button class="lightbox-prev" id="lightbox-prev" aria-label="Foto anterior">‹</button>
+      <img id="lightbox-img" src="" alt="" />
+      <button class="lightbox-next" id="lightbox-next" aria-label="Próxima foto">›</button>
+    </div>
 
     <script>
       const bookingForm = document.querySelector("#booking-form");
@@ -320,6 +355,41 @@
       });
 
       restartSlideshow();
+
+      // Lightbox
+      const photoGridImgs = Array.from(document.querySelectorAll(".photo-grid img"));
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImg = document.getElementById("lightbox-img");
+      let lightboxIndex = 0;
+
+      function openLightbox(index) {
+        lightboxIndex = index;
+        lightboxImg.src = photoGridImgs[lightboxIndex].src;
+        lightboxImg.alt = photoGridImgs[lightboxIndex].alt;
+        lightbox.classList.add("open");
+      }
+
+      function closeLightbox() {
+        lightbox.classList.remove("open");
+      }
+
+      function moveLightbox(dir) {
+        lightboxIndex = (lightboxIndex + dir + photoGridImgs.length) % photoGridImgs.length;
+        lightboxImg.src = photoGridImgs[lightboxIndex].src;
+        lightboxImg.alt = photoGridImgs[lightboxIndex].alt;
+      }
+
+      photoGridImgs.forEach((img, i) => img.addEventListener("click", () => openLightbox(i)));
+      document.getElementById("lightbox-close").addEventListener("click", closeLightbox);
+      document.getElementById("lightbox-prev").addEventListener("click", () => moveLightbox(-1));
+      document.getElementById("lightbox-next").addEventListener("click", () => moveLightbox(1));
+      lightbox.addEventListener("click", (e) => { if (e.target === lightbox) closeLightbox(); });
+      document.addEventListener("keydown", (e) => {
+        if (!lightbox.classList.contains("open")) return;
+        if (e.key === "Escape") closeLightbox();
+        if (e.key === "ArrowLeft") moveLightbox(-1);
+        if (e.key === "ArrowRight") moveLightbox(1);
+      });
     </script>
   </body>
 </html>
