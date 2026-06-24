@@ -858,6 +858,370 @@ img {
   }
 }
 
+/* Secao de video (pagina publica) */
+.video-section {
+  background: var(--panel);
+  border-top: 1px solid rgba(201, 168, 76, 0.18);
+}
+
+.video-embed {
+  max-width: 860px;
+  margin: 0 auto;
+  aspect-ratio: 16 / 9;
+}
+
+.video-embed iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+/* ===================== Painel Administrativo ===================== */
+
+.admin-login-screen {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background:
+    radial-gradient(circle at 30% 10%, rgba(107, 15, 26, 0.35), transparent 45%),
+    var(--black);
+  padding: 24px;
+}
+
+.admin-login-card {
+  width: min(420px, 100%);
+  display: grid;
+  gap: 16px;
+  padding: 40px 32px;
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.admin-login-logo {
+  height: 64px;
+  width: auto;
+  margin: 0 auto 6px;
+}
+
+.admin-login-card h1 {
+  margin: 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 26px;
+  text-transform: uppercase;
+}
+
+.admin-login-subtitle {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.admin-login-card label {
+  display: grid;
+  gap: 8px;
+  text-align: left;
+  color: var(--gold-light);
+  font-size: 14px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.admin-login-card input {
+  min-height: 48px;
+  border: 1px solid rgba(201, 168, 76, 0.34);
+  border-radius: 4px;
+  padding: 12px 14px;
+  background: #0b0b0b;
+  color: var(--text);
+  font: inherit;
+}
+
+.admin-login-card button {
+  min-height: 50px;
+  border: 0;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #e4bf5c 0%, #c4962e 100%);
+  color: #16100a;
+  font-weight: 900;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.admin-error {
+  margin: 0;
+  color: #ff9d9d;
+  font-size: 14px;
+}
+
+.admin-body {
+  min-height: 100vh;
+  background: var(--black);
+}
+
+.admin-header {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 16px clamp(18px, 4vw, 40px);
+  background: linear-gradient(180deg, #720916 0%, #580812 100%);
+  border-bottom: 1px solid var(--line);
+}
+
+.admin-header-logo {
+  height: 44px;
+  width: auto;
+}
+
+.admin-header h1 {
+  flex: 1;
+  margin: 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 22px;
+  text-transform: uppercase;
+}
+
+.admin-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.admin-header-actions a {
+  color: var(--gold-light);
+  font-weight: 700;
+}
+
+.admin-header-actions button {
+  min-height: 40px;
+  padding: 0 18px;
+  border: 1px solid var(--gold);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--gold-light);
+  font-weight: 800;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.admin-tabs {
+  display: flex;
+  gap: 6px;
+  padding: 14px clamp(18px, 4vw, 40px) 0;
+  background: #0f0f0f;
+  border-bottom: 1px solid rgba(201, 168, 76, 0.22);
+}
+
+.admin-tabs button {
+  min-height: 44px;
+  padding: 0 20px;
+  border: 1px solid transparent;
+  border-bottom: none;
+  border-radius: 6px 6px 0 0;
+  background: transparent;
+  color: var(--muted);
+  font-weight: 800;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.admin-tabs button.active {
+  background: var(--panel);
+  border-color: rgba(201, 168, 76, 0.4);
+  color: var(--gold-light);
+}
+
+.admin-main {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: clamp(20px, 4vw, 40px);
+}
+
+.admin-status {
+  margin: 0 0 20px;
+  padding: 12px 16px;
+  border-radius: 6px;
+  background: rgba(201, 168, 76, 0.18);
+  border: 1px solid var(--gold);
+  color: var(--gold-light);
+  font-weight: 700;
+}
+
+.admin-status.error {
+  background: rgba(255, 80, 80, 0.12);
+  border-color: #ff5050;
+  color: #ff9d9d;
+}
+
+.admin-panel {
+  display: none;
+}
+
+.admin-panel.active {
+  display: block;
+}
+
+.admin-panel-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.admin-panel-head h2 {
+  margin: 0;
+  font-family: "Playfair Display", Georgia, serif;
+  text-transform: uppercase;
+  font-size: 22px;
+}
+
+.admin-panel-head button,
+.admin-upload-button {
+  min-height: 42px;
+  padding: 0 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 0;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #e4bf5c 0%, #c4962e 100%);
+  color: #16100a;
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.admin-upload-button.small {
+  min-height: 34px;
+  padding: 0 12px;
+  font-size: 11px;
+}
+
+.admin-hint {
+  color: var(--muted);
+  margin-bottom: 18px;
+}
+
+.admin-field {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 18px;
+  color: var(--gold-light);
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.admin-field input,
+.admin-field textarea {
+  width: 100%;
+  border: 1px solid rgba(201, 168, 76, 0.34);
+  border-radius: 4px;
+  padding: 12px 14px;
+  background: #0b0b0b;
+  color: var(--text);
+  font: inherit;
+  text-transform: none;
+  font-weight: 400;
+}
+
+.admin-room-list {
+  display: grid;
+  gap: 18px;
+}
+
+.admin-room-card {
+  display: grid;
+  grid-template-columns: 160px 1fr auto;
+  gap: 18px;
+  align-items: start;
+  padding: 18px;
+  background: var(--panel);
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  border-radius: 8px;
+}
+
+.admin-room-photo {
+  display: grid;
+  gap: 8px;
+}
+
+.room-photo-preview {
+  width: 100%;
+  height: 110px;
+  object-fit: cover;
+  border-radius: 6px;
+  background: #0b0b0b;
+}
+
+.admin-room-actions {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+}
+
+.admin-room-actions button {
+  min-height: 38px;
+  padding: 0 16px;
+  border-radius: 4px;
+  border: 1px solid var(--gold);
+  background: transparent;
+  color: var(--gold-light);
+  font-weight: 800;
+  text-transform: uppercase;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.admin-room-actions .remove-room {
+  border-color: #ff5050;
+  color: #ff9d9d;
+}
+
+.admin-photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.admin-photo-item {
+  position: relative;
+  margin: 0;
+}
+
+.admin-photo-item img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.admin-photo-item button {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 0;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
+  cursor: pointer;
+}
+
+@media (max-width: 760px) {
+  .admin-room-card {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* Galeria de Fotos */
 .photo-grid {
   display: grid;

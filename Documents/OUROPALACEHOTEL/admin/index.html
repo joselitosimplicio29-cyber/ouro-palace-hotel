@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Painel Administrativo | Ouro Palace Hotel</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../styles.css" />
+  </head>
+  <body class="admin-body">
+    <header class="admin-header">
+      <img src="../assets/originais/LOGOMARCA.png" alt="Ouro Palace Hotel" class="admin-header-logo" />
+      <h1>Painel Administrativo</h1>
+      <div class="admin-header-actions">
+        <a href="../index.html" target="_blank" rel="noopener">Ver site</a>
+        <button id="logout-button" type="button">Sair</button>
+      </div>
+    </header>
+
+    <nav class="admin-tabs" id="admin-tabs">
+      <button data-tab="quartos" class="active">Quartos</button>
+      <button data-tab="sobre">Sobre</button>
+      <button data-tab="fotos">Fotos</button>
+      <button data-tab="video">Vídeo</button>
+    </nav>
+
+    <main class="admin-main">
+      <p class="admin-status" id="admin-status" hidden></p>
+
+      <!-- QUARTOS -->
+      <section class="admin-panel active" id="panel-quartos">
+        <div class="admin-panel-head">
+          <h2>Quartos</h2>
+          <button type="button" id="add-room">+ Adicionar quarto</button>
+        </div>
+        <div id="rooms-list" class="admin-room-list"></div>
+      </section>
+
+      <!-- SOBRE -->
+      <section class="admin-panel" id="panel-sobre">
+        <div class="admin-panel-head">
+          <h2>Página Sobre</h2>
+          <button type="button" id="save-sobre">Salvar</button>
+        </div>
+
+        <label class="admin-field">
+          Texto da história (um parágrafo por linha)
+          <textarea id="about-paragraphs" rows="12"></textarea>
+        </label>
+
+        <label class="admin-field">
+          Destaques (um por linha) — aparecem como os quatro cartões ao lado do texto
+          <textarea id="about-highlights" rows="4"></textarea>
+        </label>
+
+        <div class="admin-field">
+          <span>Fotos extras da página Sobre</span>
+          <div id="about-gallery" class="admin-photo-grid"></div>
+          <label class="admin-upload-button">
+            + Adicionar foto
+            <input type="file" id="about-photo-input" accept="image/*" hidden />
+          </label>
+        </div>
+      </section>
+
+      <!-- FOTOS -->
+      <section class="admin-panel" id="panel-fotos">
+        <div class="admin-panel-head">
+          <h2>Galeria de fotos da página inicial</h2>
+        </div>
+        <div id="gallery-grid" class="admin-photo-grid"></div>
+        <label class="admin-upload-button">
+          + Adicionar foto
+          <input type="file" id="gallery-photo-input" accept="image/*" hidden />
+        </label>
+      </section>
+
+      <!-- VIDEO -->
+      <section class="admin-panel" id="panel-video">
+        <div class="admin-panel-head">
+          <h2>Vídeo</h2>
+          <button type="button" id="save-video">Salvar</button>
+        </div>
+        <p class="admin-hint">
+          Cole o link de um vídeo do YouTube, Instagram ou Facebook. Ele aparecerá em uma
+          seção de vídeo na página inicial. Deixe em branco para não exibir nenhum vídeo.
+        </p>
+        <label class="admin-field">
+          Link do vídeo
+          <input type="url" id="video-url" placeholder="https://www.youtube.com/watch?v=..." />
+        </label>
+      </section>
+    </main>
+
+    <template id="room-card-template">
+      <article class="admin-room-card">
+        <div class="admin-room-photo">
+          <img class="room-photo-preview" alt="" />
+          <label class="admin-upload-button small">
+            Trocar foto
+            <input type="file" class="room-photo-input" accept="image/*" hidden />
+          </label>
+        </div>
+        <div class="admin-room-fields">
+          <label class="admin-field">
+            Nome do quarto
+            <input type="text" class="room-name" placeholder="Ex: Suíte Master" />
+          </label>
+          <label class="admin-field">
+            Preço (R$)
+            <input type="number" class="room-price" min="0" step="1" placeholder="150" />
+          </label>
+          <label class="admin-field">
+            Comodidades (uma por linha)
+            <textarea class="room-amenities" rows="3"></textarea>
+          </label>
+        </div>
+        <div class="admin-room-actions">
+          <button type="button" class="save-room">Salvar</button>
+          <button type="button" class="remove-room">Remover</button>
+        </div>
+      </article>
+    </template>
+
+    <script src="admin.js"></script>
+  </body>
+</html>

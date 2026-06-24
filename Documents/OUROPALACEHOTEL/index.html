@@ -103,71 +103,7 @@
           <div class="heading-line"></div>
         </div>
 
-        <div class="room-grid">
-          <article class="room-card">
-            <img src="assets/originais/camara varanda 2.jpeg" alt="Suíte Master" />
-            <div class="room-body">
-              <h3>Suíte Master</h3>
-              <ul>
-                <li><span>♙</span> 1 - 2 pessoas</li>
-                <li><span>▭</span> 1 cama de casal</li>
-                <li><span>⌁</span> WiFi gratuito</li>
-              </ul>
-            </div>
-            <div class="room-footer">
-              <p>A partir de <strong>R$ 150,00</strong></p>
-              <a href="#reservas">Ver detalhes</a>
-            </div>
-          </article>
-
-          <article class="room-card">
-            <img src="assets/originais/suite-standard.jpg" alt="Suíte Standard" />
-            <div class="room-body">
-              <h3>Suíte Standard</h3>
-              <ul>
-                <li><span>♙</span> 1 - 2 pessoas</li>
-                <li><span>▭</span> 1 cama de casal</li>
-                <li><span>⌁</span> WiFi gratuito</li>
-              </ul>
-            </div>
-            <div class="room-footer">
-              <p>A partir de <strong>R$ 130,00</strong></p>
-              <a href="#reservas">Ver detalhes</a>
-            </div>
-          </article>
-
-          <article class="room-card">
-            <img src="assets/originais/suite-single.jpg" alt="Suíte Single" />
-            <div class="room-body">
-              <h3>Suíte Single</h3>
-              <ul>
-                <li><span>♙</span> 1 pessoa</li>
-                <li><span>▭</span> 1 cama de solteiro</li>
-                <li><span>⌁</span> WiFi gratuito</li>
-              </ul>
-            </div>
-            <div class="room-footer">
-              <p>A partir de <strong>R$ 100,00</strong></p>
-              <a href="#reservas">Ver detalhes</a>
-            </div>
-          </article>
-
-          <article class="room-card">
-            <img src="assets/originais/cama solteiro duplo.jpeg" alt="Suíte Double" />
-            <div class="room-body">
-              <h3>Suíte Double</h3>
-              <ul>
-                <li><span>♙</span> 1 - 2 pessoas</li>
-                <li><span>▭</span> 2 camas de solteiro</li>
-                <li><span>▣</span> Frigobar</li>
-              </ul>
-            </div>
-            <div class="room-footer">
-              <p>A partir de <strong>R$ 180,00</strong></p>
-              <a href="#reservas">Ver detalhes</a>
-            </div>
-          </article>
-        </div>
+        <div class="room-grid" id="room-grid"></div>
       </section>
 
       <section class="section split-section" id="sobre">
@@ -217,22 +153,19 @@
           </div>
           <div class="heading-line"></div>
         </div>
-        <div class="photo-grid">
-          <img src="assets/originais/quarto-casal-standard.jpg" alt="Quarto casal standard" />
-          <img src="assets/originais/camara varanda 2.jpeg" alt="Quarto casal com varanda" />
-          <img src="assets/originais/quarto com banheiro casal.jpeg" alt="Quarto casal com banheiro" />
-          <img src="assets/originais/cama solteiro duplo.jpeg" alt="Quarto duplo com duas camas" />
-          <img src="assets/originais/cama solteiro 2.jpeg" alt="Quarto solteiro" />
-          <img src="assets/originais/tv quarto solteiro duplo.jpeg" alt="Quarto duplo com TV e frigobar" />
-          <img src="assets/originais/correor.jpeg" alt="Corredor do hotel" />
-          <img src="assets/originais/foto-1.jpg" alt="Quarto com cama de casal e varanda" />
-          <img src="assets/originais/foto-7.jpg" alt="Banheiro com box de vidro" />
-          <img src="assets/originais/CASAL 1.jpeg" alt="Quarto casal" />
-          <img src="assets/originais/CASAL 2.jpeg" alt="Quarto casal 2" />
-          <img src="assets/originais/CASAL FOTO LADO.jpeg" alt="Quarto casal vista lateral" />
-          <img src="assets/originais/A NOITE QUARTO.jpeg" alt="Quarto à noite" />
-          <img src="assets/originais/CASA.jpeg" alt="Fachada do hotel" />
+        <div class="photo-grid" id="photo-grid"></div>
+      </section>
+
+      <section class="section video-section" id="video" hidden>
+        <div class="section-heading">
+          <div class="heading-line"></div>
+          <div>
+            <h2>Vídeo</h2>
+            <p>Conheça o Ouro Palace Hotel em movimento</p>
+          </div>
+          <div class="heading-line"></div>
         </div>
+        <div class="video-embed" id="video-embed"></div>
       </section>
 
       <section class="section booking-section" id="reservas">
@@ -377,7 +310,7 @@
       restartSlideshow();
 
       // Lightbox
-      const photoGridImgs = Array.from(document.querySelectorAll(".photo-grid img"));
+      let photoGridImgs = [];
       const lightbox = document.getElementById("lightbox");
       const lightboxImg = document.getElementById("lightbox-img");
       let lightboxIndex = 0;
@@ -399,7 +332,11 @@
         lightboxImg.alt = photoGridImgs[lightboxIndex].alt;
       }
 
-      photoGridImgs.forEach((img, i) => img.addEventListener("click", () => openLightbox(i)));
+      function initLightbox() {
+        photoGridImgs = Array.from(document.querySelectorAll(".photo-grid img"));
+        photoGridImgs.forEach((img, i) => img.addEventListener("click", () => openLightbox(i)));
+      }
+
       document.getElementById("lightbox-close").addEventListener("click", closeLightbox);
       document.getElementById("lightbox-prev").addEventListener("click", () => moveLightbox(-1));
       document.getElementById("lightbox-next").addEventListener("click", () => moveLightbox(1));
@@ -410,6 +347,72 @@
         if (e.key === "ArrowLeft") moveLightbox(-1);
         if (e.key === "ArrowRight") moveLightbox(1);
       });
+
+      // Conteudo dinamico (quartos, galeria, video) vindo do painel administrativo
+      function renderRooms(rooms) {
+        const grid = document.getElementById("room-grid");
+        grid.innerHTML = (rooms || [])
+          .map(
+            (room) => `
+            <article class="room-card">
+              <img src="${room.photo || ""}" alt="${room.name || "Quarto"}" />
+              <div class="room-body">
+                <h3>${room.name || ""}</h3>
+                <ul>
+                  ${(room.amenities || []).map((item) => `<li><span>•</span> ${item}</li>`).join("")}
+                </ul>
+              </div>
+              <div class="room-footer">
+                <p>A partir de <strong>R$ ${Number(room.price || 0).toFixed(2).replace(".", ",")}</strong></p>
+                <a href="#reservas">Ver detalhes</a>
+              </div>
+            </article>`
+          )
+          .join("");
+      }
+
+      function renderGallery(gallery) {
+        const grid = document.getElementById("photo-grid");
+        grid.innerHTML = (gallery || [])
+          .map((url) => `<img src="${url}" alt="Foto do Ouro Palace Hotel" />`)
+          .join("");
+        initLightbox();
+      }
+
+      function videoEmbedHtml(url) {
+        if (!url) return "";
+        const youtubeMatch = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]+)/);
+        if (youtubeMatch) {
+          return `<iframe src="https://www.youtube.com/embed/${youtubeMatch[1]}" title="Vídeo do Ouro Palace Hotel" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+        }
+        if (/instagram\.com/.test(url)) {
+          return `<iframe src="${url.replace(/\/$/, "")}/embed" title="Vídeo do Ouro Palace Hotel" allowfullscreen></iframe>`;
+        }
+        if (/facebook\.com/.test(url)) {
+          return `<iframe src="https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(url)}" title="Vídeo do Ouro Palace Hotel" allowfullscreen></iframe>`;
+        }
+        return "";
+      }
+
+      function renderVideo(url) {
+        const section = document.getElementById("video");
+        const embed = document.getElementById("video-embed");
+        const html = videoEmbedHtml(url);
+        embed.innerHTML = html;
+        section.hidden = !html;
+      }
+
+      fetch("/api/content")
+        .then((response) => response.json())
+        .then((data) => {
+          renderRooms(data.rooms);
+          renderGallery(data.gallery);
+          renderVideo(data.video_url);
+        })
+        .catch(() => {
+          document.getElementById("room-grid").innerHTML =
+            "<p>Não foi possível carregar os quartos agora.</p>";
+        });
     </script>
   </body>
 </html>

@@ -50,42 +50,9 @@
         <div class="about-content">
           <p class="eyebrow">Sobre</p>
           <h1>Nossa História</h1>
-          <p>
-            O Ouro Palace Hotel teve o início de suas atividades em fevereiro de 2015. Com a
-            chegada dos parques eólicos na região, começamos a atender aos primeiros clientes,
-            funcionários da empresa DOIS A. Inicialmente, alugamos mensalmente, sem os devidos
-            serviços de hotel. Após um ano e meio, tivemos o contrato de aluguel encerrado com a
-            empresa.
-          </p>
-          <p>
-            Na sequência, eu e minha esposa Sônia decidimos arriscar e começar a atender aos novos
-            clientes como se fossemos uma pequena pousada — pequena porque, naquele momento, só
-            tínhamos 4 quartos para oferecer os serviços. Inicialmente demos o nome de Pousada Bom
-            Descanso, que permaneceu por longos 8 anos.
-          </p>
-          <p>
-            Com o fluxo de pessoas aumentando, fomos obrigados a ampliar as acomodações. Aos
-            poucos íamos construindo de 3 em 3 quartos, até chegar a um total de 24 suítes, sendo
-            17 suítes casal e 07 suítes de solteiro. Hoje o nome do nosso empreendimento é Ouro
-            Palace Hotel. Graças ao nosso bom Deus, chegamos até aqui com muito trabalho e
-            perseverança.
-          </p>
-          <p>
-            Agradecemos aos nossos clientes e amigos, em especial ao amigo Hélio Diniz de BH, o
-            principal impulsionador para iniciarmos as primeiras ampliações, às empresas GE e
-            VESTAS que nos deram preferência para atendê-las, e a todos os nossos colaboradores,
-            que se dedicam com excelência para atender a cada um com um sorriso e simpatia
-            contagiante. Não temos um final para esta história, pois continuamos a trabalhar e
-            escrever novos capítulos.
-          </p>
-
-          <div class="service-list">
-            <span>Fundado em fevereiro de 2015</span>
-            <span>Mais de 10 anos de hospitalidade</span>
-            <span>24 suítes: 17 casal e 07 solteiro</span>
-            <span>Gestão familiar</span>
-          </div>
-
+          <div id="about-text"></div>
+          <div class="service-list" id="about-highlights"></div>
+          <div class="photo-grid" id="about-gallery"></div>
           <a class="primary-button" href="index.html#reservas">Faça sua reserva <span>→</span></a>
         </div>
       </section>
@@ -95,5 +62,29 @@
       <p>© 2026 Ouro Palace Hotel - Ourolandia, Bahia</p>
       <a href="https://wa.me/5574988562873?text=Olá,%20Ouro%20Palace%20Hotel!%20Gostaria%20de%20solicitar%20uma%20reserva.">WhatsApp</a>
     </footer>
+
+    <script>
+      fetch("/api/content")
+        .then((response) => response.json())
+        .then((data) => {
+          const about = data.about || {};
+
+          document.getElementById("about-text").innerHTML = (about.paragraphs || [])
+            .map((paragraph) => `<p>${paragraph}</p>`)
+            .join("");
+
+          document.getElementById("about-highlights").innerHTML = (about.highlights || [])
+            .map((item) => `<span>${item}</span>`)
+            .join("");
+
+          document.getElementById("about-gallery").innerHTML = (about.gallery || [])
+            .map((url) => `<img src="${url}" alt="Foto do Ouro Palace Hotel" />`)
+            .join("");
+        })
+        .catch(() => {
+          document.getElementById("about-text").innerHTML =
+            "<p>Não foi possível carregar o conteúdo agora.</p>";
+        });
+    </script>
   </body>
 </html>
